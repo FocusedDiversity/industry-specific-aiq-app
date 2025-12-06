@@ -1,0 +1,42 @@
+import { AssessmentForm } from '@/components/assessment/AssessmentForm';
+
+export const metadata = {
+  title: 'AI Maturity Assessment | Synaptiq',
+  description: 'Assess your organization\'s AI maturity and receive tailored recommendations for improvement.',
+};
+
+export default function AssessmentPage() {
+  return (
+    <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Raise Your AIQ
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Discover where your organization stands on the AI maturity curve and get actionable insights to accelerate your AI journey.
+          </p>
+        </div>
+
+        {/* Assessment Form */}
+        <AssessmentForm />
+
+        {/* Footer */}
+        <div className="mt-12 text-center text-sm text-gray-500">
+          <p>
+            Powered by{' '}
+            <a
+              href="https://synaptiq.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              Synaptiq
+            </a>
+          </p>
+        </div>
+      </div>
+    </main>
+  );
+}

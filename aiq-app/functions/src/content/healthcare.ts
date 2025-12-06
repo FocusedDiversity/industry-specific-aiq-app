@@ -1,0 +1,228 @@
+import { IndustryContent, CapabilityPrompt, NarrativeInsight, Resource } from '../types';
+
+const healthcarePrompts: CapabilityPrompt[] = [
+  {
+    capabilityId: 'strategy-leadership',
+    industry: 'healthcare',
+    prompt: 'When your executive team describes AI\'s role in patient care, how vivid and actionable is that story?',
+    helperText: '1 = exploratory slides without funding; 5 = a financed, cross-functional roadmap that links AI initiatives to measurable clinical, financial, and equity outcomes.',
+  },
+  {
+    capabilityId: 'people-culture',
+    industry: 'healthcare',
+    prompt: 'How ready are clinicians and staff to co-create outcomes with AI rather than work around it?',
+    helperText: 'Consider recruitment, ongoing training, and ethics forums. 1 = isolated champions; 5 = organization-wide fluency with incentives tied to responsible adoption.',
+  },
+  {
+    capabilityId: 'architecture-governance',
+    industry: 'healthcare',
+    prompt: 'Can you trace sensitive health data from source to sanctioned AI deployment without gaps?',
+    helperText: '1 = ad hoc integrations and manual reviews; 5 = policy-driven pipelines audited for HIPAA, security, and model risk on a recurring cadence.',
+  },
+  {
+    capabilityId: 'product-management',
+    industry: 'healthcare',
+    prompt: 'How tightly do you weave AI enhancements into new care pathways or service-line launches?',
+    helperText: '1 = AI ideas explored after rollout; 5 = dedicated product owners who co-plan AI and clinical delivery, with stage gates tied to patient impact.',
+  },
+  {
+    capabilityId: 'user-experience-ethics',
+    industry: 'healthcare',
+    prompt: 'How confident are patients and providers that AI-enabled experiences respect consent, clarity, and compassion?',
+    helperText: '1 = limited transparency into AI touchpoints; 5 = co-designed journeys with bias monitoring, escalation paths, and clear patient communications.',
+  },
+  {
+    capabilityId: 'data-sourcing',
+    industry: 'healthcare',
+    prompt: 'How complete and timely is the data that feeds your AI—from EHR to social determinants?',
+    helperText: '1 = siloed datasets refreshed manually; 5 = governed ingestion across clinical, operational, and partner feeds with traceable provenance.',
+  },
+  {
+    capabilityId: 'data-operations',
+    industry: 'healthcare',
+    prompt: 'How resilient are the pipelines that deliver trusted data to analytics and AI teams?',
+    helperText: '1 = frequent downtime and manual restarts; 5 = automated quality checks, SLA monitoring, and proactive issue resolution across environments.',
+  },
+  {
+    capabilityId: 'analytics',
+    industry: 'healthcare',
+    prompt: 'How routinely do leaders make decisions with near-real-time insight into population, financial, and operational metrics?',
+    helperText: '1 = retrospective reporting; 5 = predictive dashboards embedded in governance forums and frontline workflows.',
+  },
+  {
+    capabilityId: 'using-ai-products',
+    industry: 'healthcare',
+    prompt: 'How broadly do teams rely on proven third-party AI solutions for clinical and operational tasks?',
+    helperText: '1 = limited pilots; 5 = enterprise-wide adoption with measured ROI, change management, and integration into standard procedures.',
+  },
+  {
+    capabilityId: 'building-ai-products',
+    industry: 'healthcare',
+    prompt: 'How mature is your in-house ability to design, validate, and deploy clinical-grade AI?',
+    helperText: '1 = ad hoc prototypes; 5 = regulated pipelines with clinical validation, monitoring, and post-market surveillance.',
+  },
+  {
+    capabilityId: 'customers-ai-products',
+    industry: 'healthcare',
+    prompt: 'How effectively do patient- or partner-facing AI experiences build trust and measurable value?',
+    helperText: '1 = experimental self-service tools; 5 = personalized experiences with clear opt-ins, outcome tracking, and continuous improvement.',
+  },
+];
+
+const healthcareNarratives: NarrativeInsight[] = [
+  // Organization Foundations
+  {
+    industry: 'healthcare',
+    category: 'Organization Foundations',
+    tier: 'emerging',
+    headline: 'Building Your AI Foundation',
+    body: 'Your organization is in the early stages of AI adoption. Focus on developing a clear AI strategy aligned with clinical and operational priorities, and begin cultivating AI literacy across leadership and frontline staff.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'Organization Foundations',
+    tier: 'developing',
+    headline: 'Strengthening AI Governance',
+    body: 'You have foundational elements in place. Now is the time to formalize governance structures, expand AI training programs, and ensure your data architecture can support scaling AI initiatives.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'Organization Foundations',
+    tier: 'leading',
+    headline: 'Leading with AI Excellence',
+    body: 'Your organization demonstrates strong AI leadership. Continue to refine your governance frameworks, share learnings across the enterprise, and explore advanced AI applications that differentiate patient care.',
+  },
+  // Product Lifecycle
+  {
+    industry: 'healthcare',
+    category: 'Product Lifecycle',
+    tier: 'emerging',
+    headline: 'Integrating AI into Care Design',
+    body: 'AI is not yet integrated into your product and service development process. Begin by identifying high-impact use cases where AI can enhance patient outcomes or operational efficiency.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'Product Lifecycle',
+    tier: 'developing',
+    headline: 'Advancing AI-Enabled Care',
+    body: 'You\'re making progress integrating AI into care pathways. Focus on establishing clear ethical guidelines and patient communication standards for AI-assisted services.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'Product Lifecycle',
+    tier: 'leading',
+    headline: 'Pioneering AI-Driven Healthcare',
+    body: 'Your AI-enabled services are well-developed. Continue to monitor for bias, ensure transparency with patients, and measure the clinical impact of AI interventions.',
+  },
+  // Data Infrastructure
+  {
+    industry: 'healthcare',
+    category: 'Data Infrastructure',
+    tier: 'emerging',
+    headline: 'Establishing Data Foundations',
+    body: 'Your data infrastructure needs strengthening to support AI initiatives. Prioritize data quality, integration of disparate sources, and establishing clear data governance policies.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'Data Infrastructure',
+    tier: 'developing',
+    headline: 'Scaling Data Operations',
+    body: 'Your data capabilities are growing. Focus on automating data pipelines, improving data quality monitoring, and expanding analytics capabilities across departments.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'Data Infrastructure',
+    tier: 'leading',
+    headline: 'Data-Driven Excellence',
+    body: 'Your data infrastructure is mature and supports advanced AI applications. Continue to optimize for real-time insights and explore advanced analytics like predictive modeling.',
+  },
+  // AI & Machine Learning
+  {
+    industry: 'healthcare',
+    category: 'AI & Machine Learning',
+    tier: 'emerging',
+    headline: 'Starting Your AI Journey',
+    body: 'AI adoption is in early stages. Begin with proven third-party AI solutions that address clear clinical or operational needs, and build internal capabilities over time.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'AI & Machine Learning',
+    tier: 'developing',
+    headline: 'Expanding AI Capabilities',
+    body: 'You\'re building AI expertise. Consider developing in-house AI solutions for differentiated capabilities while continuing to leverage proven vendor solutions.',
+  },
+  {
+    industry: 'healthcare',
+    category: 'AI & Machine Learning',
+    tier: 'leading',
+    headline: 'AI Innovation Leader',
+    body: 'Your AI capabilities are advanced. Focus on clinical validation, regulatory compliance, and scaling successful AI applications across your organization.',
+  },
+];
+
+const healthcareResources: Resource[] = [
+  {
+    id: 'hc-strategy-guide',
+    title: 'Healthcare AI Strategy Playbook',
+    type: 'playbook',
+    url: 'https://synaptiq.ai/resources/healthcare-ai-strategy',
+    industry: 'healthcare',
+    capabilities: ['strategy-leadership', 'architecture-governance'],
+    maturityTiers: ['emerging', 'developing'],
+  },
+  {
+    id: 'hc-clinical-ai',
+    title: 'Clinical AI Implementation Guide',
+    type: 'whitepaper',
+    url: 'https://synaptiq.ai/resources/clinical-ai-guide',
+    industry: 'healthcare',
+    capabilities: ['building-ai-products', 'user-experience-ethics'],
+    maturityTiers: ['developing', 'leading'],
+  },
+  {
+    id: 'hc-data-governance',
+    title: 'Healthcare Data Governance Framework',
+    type: 'playbook',
+    url: 'https://synaptiq.ai/resources/healthcare-data-governance',
+    industry: 'healthcare',
+    capabilities: ['data-sourcing', 'data-operations', 'architecture-governance'],
+    maturityTiers: ['emerging', 'developing'],
+  },
+  {
+    id: 'hc-case-study-1',
+    title: 'Case Study: AI-Powered Patient Engagement',
+    type: 'case_study',
+    url: 'https://synaptiq.ai/case-studies/patient-engagement-ai',
+    industry: 'healthcare',
+    capabilities: ['customers-ai-products', 'user-experience-ethics'],
+    maturityTiers: ['developing', 'leading'],
+  },
+  {
+    id: 'hc-webinar-culture',
+    title: 'Building an AI-Ready Healthcare Culture',
+    type: 'webinar',
+    url: 'https://synaptiq.ai/webinars/healthcare-ai-culture',
+    industry: 'healthcare',
+    capabilities: ['people-culture', 'strategy-leadership'],
+    maturityTiers: ['emerging', 'developing'],
+  },
+  {
+    id: 'hc-analytics-maturity',
+    title: 'Healthcare Analytics Maturity Assessment',
+    type: 'article',
+    url: 'https://synaptiq.ai/articles/healthcare-analytics-maturity',
+    industry: 'healthcare',
+    capabilities: ['analytics', 'data-operations'],
+    maturityTiers: ['emerging', 'developing', 'leading'],
+  },
+];
+
+export function getHealthcareContent(): IndustryContent {
+  return {
+    industry: 'healthcare',
+    displayName: 'Healthcare',
+    prompts: healthcarePrompts,
+    narratives: healthcareNarratives,
+    resources: healthcareResources,
+  };
+}
