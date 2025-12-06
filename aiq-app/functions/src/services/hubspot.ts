@@ -1,4 +1,5 @@
 import { Client } from '@hubspot/api-client';
+import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/contacts';
 import { AssessmentSubmission, AssessmentResult } from '../types';
 
 // Initialize HubSpot client
@@ -62,7 +63,7 @@ async function upsertContact(
           filters: [
             {
               propertyName: 'email',
-              operator: 'EQ',
+              operator: FilterOperatorEnum.Eq,
               value: email,
             },
           ],
@@ -70,6 +71,8 @@ async function upsertContact(
       ],
       properties: ['email'],
       limit: 1,
+      after: '0',
+      sorts: [],
     });
 
     if (searchResponse.results.length > 0) {

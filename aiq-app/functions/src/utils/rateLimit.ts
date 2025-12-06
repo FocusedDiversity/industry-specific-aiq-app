@@ -1,7 +1,9 @@
 import * as admin from 'firebase-admin';
 import * as crypto from 'crypto';
 
-const db = admin.firestore();
+function getDb() {
+  return admin.firestore();
+}
 
 // Rate limit configuration
 const MAX_REQUESTS = 10; // Maximum requests per window
@@ -13,6 +15,7 @@ function hashIp(ip: string): string {
 }
 
 export async function checkRateLimit(ip: string): Promise<boolean> {
+  const db = getDb();
   const ipHash = hashIp(ip);
   const now = Date.now();
   const windowStart = now - WINDOW_MS;
@@ -20,7 +23,7 @@ export async function checkRateLimit(ip: string): Promise<boolean> {
   const rateLimitRef = db.collection('rateLimits').doc(ipHash);
 
   try {
-    const result = await db.runTransaction(async (transaction) => {
+    const result = await db.runTransaction(async (transaction: FirebaseFirestore.Transaction) => {
       const doc = await transaction.get(rateLimitRef);
 
       if (!doc.exists) {
@@ -62,6 +65,7 @@ export async function checkRateLimit(ip: string): Promise<boolean> {
 
 // Cleanup old rate limit records (call via scheduled function)
 export async function cleanupRateLimits(): Promise<void> {
+  const db = getDb();
   const cutoff = Date.now() - WINDOW_MS * 2; // Keep for 2x the window
 
   const snapshot = await db
@@ -71,7 +75,7 @@ export async function cleanupRateLimits(): Promise<void> {
     .get();
 
   const batch = db.batch();
-  snapshot.docs.forEach((doc) => {
+  snapshot.docs.forEach((doc: FirebaseFirestore.QueryDocumentSnapshot) => {
     batch.delete(doc.ref);
   });
 

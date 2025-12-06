@@ -6,7 +6,9 @@ import { checkRateLimit } from '../utils/rateLimit';
 import { calculateResults } from '../utils/scoring';
 import { AssessmentSubmission } from '../types';
 
-const db = admin.firestore();
+function getDb() {
+  return admin.firestore();
+}
 
 export async function submitAssessment(
   req: functions.https.Request,
@@ -37,6 +39,7 @@ export async function submitAssessment(
     }
 
     // Generate assessment ID
+    const db = getDb();
     const assessmentId = db.collection('assessments').doc().id;
     const submissionWithId: AssessmentSubmission = {
       ...submission,
