@@ -210,7 +210,7 @@ export function AssessmentForm() {
           <div className="space-y-6">
             {/* Category header */}
             <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full text-blue-700 mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full text-[#cc5e58] mb-4">
                 <span className="text-xl">{categoryConfig?.icon}</span>
                 <span className="font-medium">{currentCategory}</span>
               </div>
@@ -225,7 +225,7 @@ export function AssessmentForm() {
               </div>
               <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-blue-600 transition-all duration-300"
+                  className="h-full bg-[#cc5e58] transition-all duration-300"
                   style={{ width: `${progress.assessment}%` }}
                 />
               </div>
@@ -331,7 +331,7 @@ export function AssessmentForm() {
             px-8 py-3 rounded-lg font-semibold transition-all duration-200
             ${buttonState.disabled
               ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
+              : 'bg-[#cc5e58] text-white hover:bg-[#b54f4a] shadow-md hover:shadow-lg'
             }
           `}
         >

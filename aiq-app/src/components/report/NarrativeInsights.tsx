@@ -19,7 +19,7 @@ interface NarrativeInsightsProps {
 export function NarrativeInsights({ industry, categoryScores }: NarrativeInsightsProps) {
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
+      <h2 className="text-2xl font-bold text-white mb-6">
         Your AI Maturity Insights
       </h2>
 

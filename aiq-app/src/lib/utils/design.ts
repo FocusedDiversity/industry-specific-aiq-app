@@ -2,11 +2,11 @@ import { MaturityScore, MaturityTier } from '@/types';
 
 // Maturity score to color mapping
 export const MATURITY_COLORS: Record<MaturityScore, string> = {
-  1: '#dbeafe', // Very light blue
-  2: '#93c5fd', // Light blue
-  3: '#3b82f6', // Medium blue
-  4: '#1d4ed8', // Dark blue
-  5: '#1e3a8a', // Very dark blue
+  1: '#dbebf3', // Lightest
+  2: '#b8d3e2', // Light
+  3: '#3c6374', // Medium
+  4: '#084150', // Dark
+  5: '#043143', // Darkest
 };
 
 // Get color for a maturity score

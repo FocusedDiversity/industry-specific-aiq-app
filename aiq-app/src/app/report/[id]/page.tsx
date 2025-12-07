@@ -1,10 +1,6 @@
 import { ReportPageClient } from './ReportPageClient';
 
-// Required for static export - pre-generate demo page
-export function generateStaticParams() {
-  return [{ id: 'demo' }];
-}
-
-export default function ReportPage({ params }: { params: { id: string } }) {
-  return <ReportPageClient id={params.id} />;
+export default async function ReportPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <ReportPageClient id={id} />;
 }

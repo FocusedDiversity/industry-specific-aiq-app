@@ -104,13 +104,13 @@ export function ReportPageClient({ id }: ReportPageClientProps) {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <main className="min-h-screen bg-[#494f5b] py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-48 mx-auto"></div>
+            <div className="h-8 bg-gray-600 rounded w-64 mx-auto mb-4"></div>
+            <div className="h-4 bg-gray-600 rounded w-48 mx-auto"></div>
           </div>
-          <p className="mt-8 text-gray-600">Loading your results...</p>
+          <p className="mt-8 text-gray-300">Loading your results...</p>
         </div>
       </main>
     );
@@ -118,17 +118,17 @@ export function ReportPageClient({ id }: ReportPageClientProps) {
 
   if (error || !results) {
     return (
-      <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <main className="min-h-screen bg-[#494f5b] py-12 px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          <h1 className="text-2xl font-bold text-white mb-4">
             Unable to Load Results
           </h1>
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-300 mb-8">
             {error || 'Assessment results not found.'}
           </p>
           <a
             href="/assessment"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-[#cc5e58] text-white font-semibold rounded-lg hover:bg-[#b54f4a] transition-colors"
           >
             Take the Assessment
           </a>
@@ -138,7 +138,7 @@ export function ReportPageClient({ id }: ReportPageClientProps) {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
+    <main className="min-h-screen bg-[#494f5b] py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <ReportDashboard results={results} />
       </div>

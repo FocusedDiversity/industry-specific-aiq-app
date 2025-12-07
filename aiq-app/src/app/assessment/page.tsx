@@ -7,14 +7,14 @@ export const metadata = {
 
 export default function AssessmentPage() {
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
+    <main className="min-h-screen bg-[#494f5b] py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Raise Your AIQ
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Discover where your organization stands on the AI maturity curve and get actionable insights to accelerate your AI journey.
           </p>
         </div>
@@ -23,14 +23,14 @@ export default function AssessmentPage() {
         <AssessmentForm />
 
         {/* Footer */}
-        <div className="mt-12 text-center text-sm text-gray-500">
+        <div className="mt-12 text-center text-sm text-[#f7cfa5] border-t border-[#f7cfa5] pt-8">
           <p>
             Powered by{' '}
             <a
               href="https://synaptiq.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-[#a1b8ca] hover:underline"
             >
               Synaptiq
             </a>

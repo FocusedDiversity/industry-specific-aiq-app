@@ -7,19 +7,19 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <main className="min-h-screen bg-[#494f5b]">
       {/* Hero Section */}
       <div className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Raise Your <span className="text-blue-600">AIQ</span>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Raise Your <span className="text-white">AIQ</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
             Discover where your organization stands on the AI maturity curve. Get actionable insights tailored to your industry.
           </p>
           <Link
             href="/assessment"
-            className="inline-flex items-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
+            className="inline-flex items-center px-8 py-4 bg-[#cc5e58] text-white text-lg font-semibold rounded-lg hover:bg-[#b54f4a] transition-all shadow-lg hover:shadow-xl"
           >
             Start Free Assessment
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,12 +90,12 @@ export default function Home() {
 
         {/* Demo link */}
         <div className="text-center">
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-300 mb-4">
             Want to see what results look like?
           </p>
           <Link
             href="/report/demo"
-            className="text-blue-600 font-medium hover:underline"
+            className="text-[#a1b8ca] font-medium hover:underline"
           >
             View Demo Report →
           </Link>
@@ -103,15 +103,15 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
+      <footer className="border-t border-[#f7cfa5] py-8">
+        <div className="max-w-6xl mx-auto px-4 text-center text-[#f7cfa5] text-sm">
           <p>
             Powered by{' '}
             <a
               href="https://synaptiq.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-[#a1b8ca] hover:underline"
             >
               Synaptiq
             </a>

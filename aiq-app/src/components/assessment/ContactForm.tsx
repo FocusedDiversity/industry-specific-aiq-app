@@ -56,7 +56,7 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
           onBlur={() => handleBlur('email')}
           placeholder="you@company.com"
           className={`
-            w-full px-4 py-3 rounded-lg border bg-white
+            w-full px-4 py-3 rounded-lg border bg-white text-gray-900
             focus:ring-2 focus:ring-blue-500 focus:border-blue-500
             ${showError('email') ? 'border-red-500' : 'border-gray-300'}
           `}
@@ -79,7 +79,7 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
             value={data.name}
             onChange={(e) => handleChange('name', e.target.value)}
             placeholder="John Smith"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
@@ -93,7 +93,7 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
             value={data.title}
             onChange={(e) => handleChange('title', e.target.value)}
             placeholder="VP of Data & Analytics"
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
       </div>
@@ -108,7 +108,7 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
           value={data.company}
           onChange={(e) => handleChange('company', e.target.value)}
           placeholder="Acme Healthcare"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
 
@@ -123,7 +123,7 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
           placeholder="Tell us more about your AI goals or challenges..."
           rows={3}
           maxLength={1000}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
         />
         <p className="mt-1 text-xs text-gray-500 text-right">
           {data.priorityNotes.length}/1000 characters
@@ -143,10 +143,10 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
             <span className="font-medium">I agree to receive my assessment results and related communications from Synaptiq.</span>
             {' '}I understand that my information will be processed in accordance with the{' '}
             <a
-              href="https://synaptiq.ai/privacy"
+              href="https://www.synaptiq.ai/legal-stuff"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="text-[#a1b8ca] hover:underline"
             >
               Privacy Policy
             </a>

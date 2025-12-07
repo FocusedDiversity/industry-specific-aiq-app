@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MaturityScore, Capability, CapabilityCategory } from '@/types';
 import { getMaturityColor, CATEGORY_CONFIG } from '@/lib/utils/design';
 
@@ -27,15 +27,51 @@ export function DonutChart({
   hoveredSlice,
   onSliceHover,
   onSliceClick,
-  animate = true,
+  animate = false,
 }: DonutChartProps) {
-  const [animatedValues, setAnimatedValues] = useState<Set<MaturityScore>>(new Set());
-  const [showScore, setShowScore] = useState(!animate);
-  const [showLabel, setShowLabel] = useState(!animate);
+  const [animatedValues] = useState<Set<MaturityScore>>(new Set([1, 2, 3, 4, 5]));
+  const [showScore] = useState(true);
+  const [showLabel] = useState(true);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [chartOpacity, setChartOpacity] = useState(0);
+  const [showLogo, setShowLogo] = useState(true);
+  const [logoPhase, setLogoPhase] = useState<'fadeIn' | 'loop' | 'fadeOut'>('fadeIn');
+
+  // Logo and chart animation sequence
+  useEffect(() => {
+    // Phase 1: Logo fades in and starts butterfly flight (0-500ms)
+    const fadeInTimer = setTimeout(() => {
+      setLogoPhase('loop');
+    }, 500);
+
+    // Phase 2: Logo butterfly flight completes, start fade out (500ms + 3000ms = 3500ms)
+    const fadeOutTimer = setTimeout(() => {
+      setLogoPhase('fadeOut');
+    }, 3500);
+
+    // Phase 3: Logo fades out, chart fades in and starts spinning (4000ms)
+    const hideLogoTimer = setTimeout(() => {
+      setShowLogo(false);
+      setChartOpacity(1);
+      setIsSpinning(true);
+    }, 4000);
+
+    // Phase 4: Stop spinning after 2 seconds of spinning (6000ms)
+    const stopSpinTimer = setTimeout(() => {
+      setIsSpinning(false);
+    }, 6000);
+
+    return () => {
+      clearTimeout(fadeInTimer);
+      clearTimeout(fadeOutTimer);
+      clearTimeout(hideLogoTimer);
+      clearTimeout(stopSpinTimer);
+    };
+  }, []);
 
   // Chart dimensions
-  const outerRadius = 150;
-  const innerRadius = 90;
+  const outerRadius = 180;
+  const innerRadius = 110;
   const centerX = 200;
   const centerY = 200;
 
@@ -63,46 +99,57 @@ export function DonutChart({
     return `M ${x1Inner} ${y1Inner} L ${x1Outer} ${y1Outer} A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${x2Outer} ${y2Outer} L ${x2Inner} ${y2Inner} A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${x1Inner} ${y1Inner} Z`;
   };
 
-  // Animation effect - pop out slices by value (lightest to darkest)
-  useEffect(() => {
-    if (!animate) {
-      setAnimatedValues(new Set([1, 2, 3, 4, 5]));
-      setShowScore(true);
-      setShowLabel(true);
-      return;
-    }
-
-    const animateByValue = (value: MaturityScore, delay: number) => {
-      setTimeout(() => {
-        setAnimatedValues((prev) => new Set([...prev, value]));
-      }, delay);
-    };
-
-    // Animate from value 1 (lightest) to value 5 (darkest)
-    animateByValue(1, 300);
-    animateByValue(2, 800);
-    animateByValue(3, 1300);
-    animateByValue(4, 1800);
-    animateByValue(5, 2300);
-
-    // Show score after all slices have popped out
-    setTimeout(() => setShowScore(true), 2800);
-    // Show AIQ label after score
-    setTimeout(() => setShowLabel(true), 3300);
-  }, [animate]);
 
   // Calculate percentage
   const percentage = Math.round((totalScore / maxScore) * 100);
 
   return (
-    <svg
-      width="400"
-      height="400"
-      viewBox="0 0 400 400"
-      className="drop-shadow-lg"
-      role="img"
-      aria-label={`AIQ Score: ${totalScore} out of ${maxScore}`}
-    >
+    <div className="relative w-full max-w-md aspect-square">
+      {/* Logo animation */}
+      {showLogo && (
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            opacity: logoPhase === 'fadeOut' ? 0 : 1,
+            transition: 'opacity 0.5s ease-in-out',
+          }}
+        >
+          <img
+            src="/synaptiq-logo.png"
+            alt="Synaptiq"
+            className="logo-animation"
+            style={{
+              width: logoPhase === 'fadeIn' ? '40px' : '80px',
+              height: logoPhase === 'fadeIn' ? '40px' : '80px',
+              opacity: logoPhase === 'fadeIn' ? 0 : 1,
+              transition: logoPhase === 'fadeOut' ? 'opacity 0.5s ease-out' : 'all 0.5s ease-out',
+              animation: logoPhase === 'loop' ? 'logo-loop 3s ease-in-out forwards' : 'none',
+              // Keep final position during fadeOut (matches end of logo-loop animation)
+              transform: logoPhase === 'fadeOut' ? 'translate(80px, 80px) scale(1) rotate(0deg)' : undefined,
+            }}
+          />
+        </div>
+      )}
+
+      {/* Donut chart */}
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 400 400"
+        className="drop-shadow-lg"
+        role="img"
+        aria-label={`AIQ Score: ${totalScore} out of ${maxScore}`}
+        style={{
+          opacity: chartOpacity,
+          transition: 'opacity 0.5s ease-in',
+        }}
+      >
+      <g
+        style={{
+          transformOrigin: `${centerX}px ${centerY}px`,
+          animation: isSpinning ? 'spin-decelerate 2s ease-out forwards' : 'none',
+        }}
+      >
       {slices.map((slice, index) => {
         const isAnimated = animatedValues.has(slice.score);
         const isHovered = hoveredSlice === index;
@@ -142,51 +189,67 @@ export function DonutChart({
           />
         );
       })}
+      </g>
 
-      {/* Center text - Label */}
-      <text
-        x={centerX}
-        y={centerY - 15}
-        textAnchor="middle"
-        className="fill-gray-600 font-bold pointer-events-none"
-        style={{
-          fontSize: '16px',
-          opacity: showLabel ? 1 : 0,
-          transition: 'opacity 0.8s ease-in',
-        }}
-      >
-        AIQ Score
-      </text>
+      {/* Center text - show capability name on hover, otherwise show score */}
+      {hoveredSlice !== null ? (
+        <>
+          <text
+            x={centerX}
+            y={centerY - 5}
+            textAnchor="middle"
+            className="fill-gray-800 font-bold pointer-events-none"
+            style={{ fontSize: '14px' }}
+          >
+            {slices[hoveredSlice].capability.name}
+          </text>
+          <text
+            x={centerX}
+            y={centerY + 25}
+            textAnchor="middle"
+            className="fill-gray-600 pointer-events-none"
+            style={{ fontSize: '24px', fontWeight: 'bold' }}
+          >
+            {slices[hoveredSlice].score}/5
+          </text>
+        </>
+      ) : (
+        <>
+          {/* Center text - Label */}
+          <text
+            x={centerX}
+            y={centerY - 15}
+            textAnchor="middle"
+            className="fill-gray-600 font-bold pointer-events-none"
+            style={{ fontSize: '16px' }}
+          >
+            AIQ Score
+          </text>
 
-      {/* Center text - Score */}
-      <text
-        x={centerX}
-        y={centerY + 20}
-        textAnchor="middle"
-        className="fill-gray-800 font-bold pointer-events-none"
-        style={{
-          fontSize: '36px',
-          opacity: showScore ? 1 : 0,
-          transition: 'opacity 0.8s ease-in',
-        }}
-      >
-        {totalScore}
-      </text>
+          {/* Center text - Score */}
+          <text
+            x={centerX}
+            y={centerY + 20}
+            textAnchor="middle"
+            className="fill-gray-800 font-bold pointer-events-none"
+            style={{ fontSize: '36px' }}
+          >
+            {totalScore}
+          </text>
 
-      {/* Center text - Percentage */}
-      <text
-        x={centerX}
-        y={centerY + 45}
-        textAnchor="middle"
-        className="fill-gray-500 pointer-events-none"
-        style={{
-          fontSize: '14px',
-          opacity: showScore ? 1 : 0,
-          transition: 'opacity 0.8s ease-in',
-        }}
-      >
-        {percentage}%
-      </text>
-    </svg>
+          {/* Center text - Percentage */}
+          <text
+            x={centerX}
+            y={centerY + 45}
+            textAnchor="middle"
+            className="fill-gray-500 pointer-events-none"
+            style={{ fontSize: '14px' }}
+          >
+            {percentage}%
+          </text>
+        </>
+      )}
+      </svg>
+    </div>
   );
 }

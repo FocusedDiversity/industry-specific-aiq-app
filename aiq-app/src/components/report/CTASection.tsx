@@ -6,11 +6,11 @@ interface CTASectionProps {
 
 export function CTASection({ meetingUrl = 'https://synaptiq.ai/schedule' }: CTASectionProps) {
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-white text-center">
+    <div className="bg-gradient-to-r from-[#cc5e58] to-[#a84a45] rounded-2xl p-8 text-white text-center">
       <h2 className="text-2xl font-bold mb-3">
         Ready to Accelerate Your AI Journey?
       </h2>
-      <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+      <p className="text-red-100 mb-6 max-w-2xl mx-auto">
         Our AI strategy experts can help you turn these insights into action. Schedule a free consultation to discuss your priorities and create a roadmap for success.
       </p>
 
@@ -19,7 +19,7 @@ export function CTASection({ meetingUrl = 'https://synaptiq.ai/schedule' }: CTAS
           href={meetingUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg hover:bg-blue-50 transition-colors shadow-lg hover:shadow-xl"
+          className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#cc5e58] font-semibold rounded-lg hover:bg-red-50 transition-colors shadow-lg hover:shadow-xl"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -38,10 +38,10 @@ export function CTASection({ meetingUrl = 'https://synaptiq.ai/schedule' }: CTAS
         </button>
       </div>
 
-      <p className="mt-6 text-sm text-blue-200">
+      <p className="mt-6 text-sm text-red-200">
         Questions? Contact us at{' '}
-        <a href="mailto:hello@synaptiq.ai" className="underline hover:text-white">
-          hello@synaptiq.ai
+        <a href="mailto:humans@synaptiq.ai" className="underline hover:text-white">
+          humans@synaptiq.ai
         </a>
       </p>
     </div>

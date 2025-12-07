@@ -57,7 +57,7 @@ export function PriorityPicker({
         <p className="text-gray-600">
           Choose the capabilities you most want to improve. We&apos;ll provide tailored resources and recommendations.
         </p>
-        <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full text-sm text-blue-700">
+        <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full text-sm text-[#cc5e58]">
           <span className="font-medium">{selectedPriorities.length}</span>
           <span>of {maxPriorities} selected</span>
         </div>
@@ -89,16 +89,16 @@ export function PriorityPicker({
                     className={`
                       relative flex items-center gap-4 p-4 rounded-lg border-2 text-left transition-all duration-200
                       ${isSelected
-                        ? 'border-blue-600 bg-blue-50'
+                        ? 'border-[#cc5e58] bg-red-50'
                         : canSelect
-                          ? 'border-gray-200 bg-white hover:border-blue-300'
+                          ? 'border-gray-200 bg-white hover:border-[#cc5e58]'
                           : 'border-gray-100 bg-gray-50 cursor-not-allowed opacity-60'
                       }
                     `}
                   >
                     {/* Priority number badge */}
                     {priorityNumber && (
-                      <div className="absolute -top-2 -left-2 w-7 h-7 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
+                      <div className="absolute -top-2 -left-2 w-7 h-7 bg-[#cc5e58] rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
                         {priorityNumber}
                       </div>
                     )}
@@ -118,7 +118,7 @@ export function PriorityPicker({
 
                     {/* Capability name */}
                     <div className="flex-1 min-w-0">
-                      <p className={`font-medium truncate ${isSelected ? 'text-blue-900' : 'text-gray-900'}`}>
+                      <p className={`font-medium truncate ${isSelected ? 'text-[#994745]' : 'text-gray-900'}`}>
                         {cap.name}
                       </p>
                       {score && score <= 2 && (
@@ -132,7 +132,7 @@ export function PriorityPicker({
                     <div className={`
                       w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0
                       ${isSelected
-                        ? 'border-blue-600 bg-blue-600'
+                        ? 'border-[#cc5e58] bg-[#cc5e58]'
                         : 'border-gray-300'
                       }
                     `}>
