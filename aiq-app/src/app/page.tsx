@@ -12,10 +12,10 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16 md:py-20">
         <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-            Raise Your <span className="text-white">AIQ</span>
+            Raise Your <span className="text-white">AIQ<sup className="text-lg sm:text-xl md:text-2xl">®</sup></span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8">
-            Discover where your organization stands on the AI maturity curve. Get actionable insights tailored to your industry.
+            Discover where your organization stands on the AI readiness curve and receive tailored report with actionable insights and resources.
           </p>
           <Link
             href="/assessment"
@@ -56,7 +56,7 @@ export default function Home() {
               Quick & Free
             </h3>
             <p className="text-gray-600">
-              Complete in 10 minutes. Instant results with actionable next steps.
+              Complete in less than 5 minutes. Instant results with actionable next steps.
             </p>
           </div>
         </div>
@@ -67,22 +67,26 @@ export default function Home() {
             Industry-Specific Assessments
           </h2>
           <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            <div className="flex items-start gap-3 sm:gap-4">
-              <div className="text-3xl sm:text-4xl">🏥</div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">Healthcare</h3>
-                <p className="text-gray-600 text-sm">
-                  For hospitals, health systems, digital health companies, and healthcare technology organizations.
-                </p>
+            <div className="p-6 rounded-xl border-2 border-gray-200 bg-white">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="text-3xl sm:text-4xl">🏥</div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">Healthcare</h3>
+                  <p className="text-gray-600 text-sm">
+                    For hospitals, health systems, digital health companies, and healthcare technology organizations.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex items-start gap-3 sm:gap-4">
-              <div className="text-3xl sm:text-4xl">⚖️</div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">Legal</h3>
-                <p className="text-gray-600 text-sm">
-                  For law firms, corporate legal departments, and legal technology providers.
-                </p>
+            <div className="p-6 rounded-xl border-2 border-gray-200 bg-white">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="text-3xl sm:text-4xl">⚖️</div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">Legal</h3>
+                  <p className="text-gray-600 text-sm">
+                    For law firms, corporate legal departments, and legal technology providers.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -103,7 +107,8 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-[#f7cfa5] py-8">
+      <footer className="py-8">
+        <div className="w-3/4 mx-auto border-t border-[#f7cfa5] mb-8"></div>
         <div className="max-w-6xl mx-auto px-4 text-center text-[#f7cfa5] text-sm">
           <p>
             Powered by{' '}

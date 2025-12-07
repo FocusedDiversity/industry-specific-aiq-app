@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
+import { RecaptchaProvider } from "@/components/providers/RecaptchaProvider";
 import "./globals.css";
 
 const quicksand = Quicksand({
@@ -24,7 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${quicksand.variable} antialiased`}>
-        {children}
+        <RecaptchaProvider>
+          {children}
+        </RecaptchaProvider>
       </body>
     </html>
   );

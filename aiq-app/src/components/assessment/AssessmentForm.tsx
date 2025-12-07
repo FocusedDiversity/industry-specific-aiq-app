@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { Industry, MaturityScore, CapabilityResponse, AssessmentSubmission } from '@/types';
 import { CAPABILITIES, CATEGORY_ORDER, getCapabilitiesByCategory } from '@/content/capabilities';
 import { getOrderedPrompts, getCapabilityPrompt } from '@/content/industries';
@@ -24,6 +25,7 @@ interface ContactFormData {
 
 export function AssessmentForm() {
   const router = useRouter();
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   // Form state
   const [currentStep, setCurrentStep] = useState<Step>('industry');
@@ -155,6 +157,16 @@ export function AssessmentForm() {
     setError(null);
 
     try {
+      // Get reCAPTCHA token
+      let recaptchaToken: string | undefined;
+      if (executeRecaptcha) {
+        try {
+          recaptchaToken = await executeRecaptcha('submit_assessment');
+        } catch (recaptchaError) {
+          console.warn('reCAPTCHA failed, continuing without token:', recaptchaError);
+        }
+      }
+
       const submission: AssessmentSubmission = {
         industry,
         email: contactData.email,
@@ -167,6 +179,7 @@ export function AssessmentForm() {
         consentGiven: contactData.consentGiven,
         consentTimestamp: new Date().toISOString(),
         submittedAt: new Date().toISOString(),
+        recaptchaToken,
         // UTM params would be captured from URL
       };
 
@@ -215,20 +228,6 @@ export function AssessmentForm() {
                 <span className="font-medium">{currentCategory}</span>
               </div>
               <p className="text-gray-600">{categoryConfig?.description}</p>
-            </div>
-
-            {/* Progress */}
-            <div className="mb-6">
-              <div className="flex justify-between text-sm text-gray-500 mb-2">
-                <span>Category {currentCategoryIndex + 1} of {CATEGORY_ORDER.length}</span>
-                <span>{Math.round(progress.assessment)}% complete</span>
-              </div>
-              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-[#cc5e58] transition-all duration-300"
-                  style={{ width: `${progress.assessment}%` }}
-                />
-              </div>
             </div>
 
             {/* Capability ratings */}
@@ -284,11 +283,11 @@ export function AssessmentForm() {
         }
         return { disabled: !isAssessmentComplete(), label: 'Select Priorities' };
       case 'priorities':
-        return { disabled: priorities.length === 0, label: 'Continue' };
+        return { disabled: priorities.length < 3, label: 'Continue' };
       case 'contact':
         return {
           disabled: isSubmitting || !contactData.email || !contactData.consentGiven,
-          label: isSubmitting ? 'Submitting...' : 'Get My Results',
+          label: isSubmitting ? 'Submitting...' : 'Get My Report',
         };
     }
   };
@@ -297,6 +296,24 @@ export function AssessmentForm() {
 
   return (
     <div className="max-w-3xl mx-auto">
+      {/* Progress bar - sticky at top during assessment */}
+      {currentStep === 'assessment' && (
+        <div className="sticky top-0 z-10 bg-[#494f5b] pt-2 pb-4 mb-4">
+          <div className="bg-[#3a3f4a] rounded-2xl shadow-lg p-4 sm:p-5">
+            <div className="flex justify-between text-sm mb-2">
+              <span className="font-medium text-white">Category {currentCategoryIndex + 1} of {CATEGORY_ORDER.length}</span>
+              <span className="font-semibold text-[#f7cfa5]">{Math.round(progress.assessment)}% complete</span>
+            </div>
+            <div className="h-3 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+              <div
+                className="h-full bg-[#f7cfa5] transition-all duration-300 rounded-full"
+                style={{ width: `${progress.assessment}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Error message */}
       {error && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">

@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { MaturityScore, Capability, CapabilityCategory } from '@/types';
-import { getMaturityColor, CATEGORY_CONFIG } from '@/lib/utils/design';
+import { MaturityScore, Capability, CapabilityCategory, getMaturityTier } from '@/types';
+import { getMaturityColor, CATEGORY_CONFIG, SCORE_LABELS, TIER_LABELS } from '@/lib/utils/design';
 
 export interface SliceData {
   capability: Capability;
@@ -192,38 +192,67 @@ export function DonutChart({
       </g>
 
       {/* Center text - show capability name on hover, otherwise show score */}
-      {hoveredSlice !== null ? (
-        <>
-          <text
-            x={centerX}
-            y={centerY - 5}
-            textAnchor="middle"
-            className="fill-gray-800 font-bold pointer-events-none"
-            style={{ fontSize: '14px' }}
-          >
-            {slices[hoveredSlice].capability.name}
-          </text>
-          <text
-            x={centerX}
-            y={centerY + 25}
-            textAnchor="middle"
-            className="fill-gray-600 pointer-events-none"
-            style={{ fontSize: '24px', fontWeight: 'bold' }}
-          >
-            {slices[hoveredSlice].score}/5
-          </text>
-        </>
-      ) : (
+      {hoveredSlice !== null ? (() => {
+        const tier = getMaturityTier(slices[hoveredSlice].score);
+        const tierColors = {
+          emerging: { bg: '#fef3c7', text: '#92400e', border: '#fde68a' },
+          developing: { bg: '#dbeafe', text: '#1e40af', border: '#bfdbfe' },
+          leading: { bg: '#d1fae5', text: '#065f46', border: '#a7f3d0' },
+        };
+        const colors = tierColors[tier];
+        const label = TIER_LABELS[tier];
+        const labelWidth = label.length * 8 + 16;
+
+        return (
+          <>
+            {/* Capability name */}
+            <text
+              x={centerX}
+              y={centerY - 10}
+              textAnchor="middle"
+              className="fill-gray-800 font-bold pointer-events-none"
+              style={{ fontSize: '14px' }}
+            >
+              {slices[hoveredSlice].capability.name}
+            </text>
+            {/* Tier badge */}
+            <rect
+              x={centerX - labelWidth / 2}
+              y={centerY + 5}
+              width={labelWidth}
+              height="24"
+              rx="12"
+              fill={colors.bg}
+              stroke={colors.border}
+              strokeWidth="1"
+              className="pointer-events-none"
+            />
+            <text
+              x={centerX}
+              y={centerY + 22}
+              textAnchor="middle"
+              className="pointer-events-none"
+              style={{
+                fontSize: '12px',
+                fontWeight: '500',
+                fill: colors.text
+              }}
+            >
+              {label}
+            </text>
+          </>
+        );
+      })() : (
         <>
           {/* Center text - Label */}
           <text
             x={centerX}
             y={centerY - 15}
             textAnchor="middle"
-            className="fill-gray-600 font-bold pointer-events-none"
-            style={{ fontSize: '16px' }}
+            className="fill-gray-800 pointer-events-none"
+            style={{ fontSize: '18px', fontWeight: 'bold', fontFamily: 'museo-slab, serif' }}
           >
-            AIQ Score
+            AIQ<tspan baselineShift="super" style={{ fontSize: '10px' }}>®</tspan> Score
           </text>
 
           {/* Center text - Score */}
@@ -235,17 +264,6 @@ export function DonutChart({
             style={{ fontSize: '36px' }}
           >
             {totalScore}
-          </text>
-
-          {/* Center text - Percentage */}
-          <text
-            x={centerX}
-            y={centerY + 45}
-            textAnchor="middle"
-            className="fill-gray-500 pointer-events-none"
-            style={{ fontSize: '14px' }}
-          >
-            {percentage}%
           </text>
         </>
       )}

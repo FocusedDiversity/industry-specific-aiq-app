@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface ContactFormData {
   email: string;
@@ -18,9 +18,14 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ data, onChange, errors }: ContactFormProps) {
-  const [touched, setTouched] = useState<Partial<Record<keyof ContactFormData, boolean>>>({});
+  const [touched, setTouched] = useState<
+    Partial<Record<keyof ContactFormData, boolean>>
+  >({});
 
-  const handleChange = (field: keyof ContactFormData, value: string | boolean) => {
+  const handleChange = (
+    field: keyof ContactFormData,
+    value: string | boolean,
+  ) => {
     onChange({ ...data, [field]: value });
   };
 
@@ -36,33 +41,37 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
     <div className="space-y-6">
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          Get Your Results
+          Get Your Report
         </h2>
         <p className="text-gray-600">
-          Enter your details to receive your personalized AI maturity report and tailored recommendations.
+          Enter your details to receive your personalized AI readiness report
+          and tailored recommendations.
         </p>
       </div>
 
       {/* Required field */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Work Email <span className="text-red-500">*</span>
         </label>
         <input
           type="email"
           id="email"
           value={data.email}
-          onChange={(e) => handleChange('email', e.target.value)}
-          onBlur={() => handleBlur('email')}
+          onChange={(e) => handleChange("email", e.target.value)}
+          onBlur={() => handleBlur("email")}
           placeholder="you@company.com"
           className={`
             w-full px-4 py-3 rounded-lg border bg-white text-gray-900
             focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            ${showError('email') ? 'border-red-500' : 'border-gray-300'}
+            ${showError("email") ? "border-red-500" : "border-gray-300"}
           `}
           required
         />
-        {showError('email') && (
+        {showError("email") && (
           <p className="mt-1 text-sm text-red-600">{errors?.email}</p>
         )}
       </div>
@@ -70,28 +79,34 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
       {/* Optional fields */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Full Name
           </label>
           <input
             type="text"
             id="name"
             value={data.name}
-            onChange={(e) => handleChange('name', e.target.value)}
+            onChange={(e) => handleChange("name", e.target.value)}
             placeholder="John Smith"
             className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Job Title
           </label>
           <input
             type="text"
             id="title"
             value={data.title}
-            onChange={(e) => handleChange('title', e.target.value)}
+            onChange={(e) => handleChange("title", e.target.value)}
             placeholder="VP of Data & Analytics"
             className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
@@ -99,27 +114,33 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
       </div>
 
       <div>
-        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="company"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Company
         </label>
         <input
           type="text"
           id="company"
           value={data.company}
-          onChange={(e) => handleChange('company', e.target.value)}
+          onChange={(e) => handleChange("company", e.target.value)}
           placeholder="Acme Healthcare"
           className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
 
       <div>
-        <label htmlFor="priorityNotes" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="priorityNotes"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Additional Context <span className="text-gray-400">(optional)</span>
         </label>
         <textarea
           id="priorityNotes"
           value={data.priorityNotes}
-          onChange={(e) => handleChange('priorityNotes', e.target.value)}
+          onChange={(e) => handleChange("priorityNotes", e.target.value)}
           placeholder="Tell us more about your AI goals or challenges..."
           rows={3}
           maxLength={1000}
@@ -137,13 +158,17 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
             <input
               type="checkbox"
               checked={data.consentGiven}
-              onChange={(e) => handleChange('consentGiven', e.target.checked)}
+              onChange={(e) => handleChange("consentGiven", e.target.checked)}
               className="w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
             />
           </div>
           <span className="text-sm text-gray-700">
-            <span className="font-medium">I agree to receive my assessment results and related communications from Synaptiq.</span>
-            {' '}I understand that my information will be processed in accordance with the{' '}
+            <span className="font-medium">
+              I agree to receive my assessment results and related
+              communications from Synaptiq.
+            </span>{" "}
+            I understand that my information will be processed in accordance
+            with the{" "}
             <a
               href="https://www.synaptiq.ai/legal-stuff"
               target="_blank"
@@ -156,10 +181,33 @@ export function ContactForm({ data, onChange, errors }: ContactFormProps) {
             <span className="text-red-500"> *</span>
           </span>
         </label>
-        {showError('consentGiven') && (
+        {showError("consentGiven") && (
           <p className="mt-2 text-sm text-red-600">{errors?.consentGiven}</p>
         )}
       </div>
+
+      {/* reCAPTCHA notice */}
+      <p className="text-xs text-gray-400 text-center">
+        This site is protected by reCAPTCHA and the Google{" "}
+        <a
+          href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-gray-600"
+        >
+          Privacy Policy
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://policies.google.com/terms"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-gray-600"
+        >
+          Terms of Service
+        </a>{" "}
+        apply.
+      </p>
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import { AssessmentForm } from '@/components/assessment/AssessmentForm';
+import { AssessmentForm } from "@/components/assessment/AssessmentForm";
 
 export const metadata = {
-  title: 'AI Maturity Assessment | Synaptiq',
-  description: 'Assess your organization\'s AI maturity and receive tailored recommendations for improvement.',
+  title: "AI Maturity Assessment | Synaptiq",
+  description:
+    "Assess your organization's AI readiness and receive tailored recommendations for improvement.",
 };
 
 export default function AssessmentPage() {
@@ -15,7 +16,8 @@ export default function AssessmentPage() {
             Raise Your AIQ
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Discover where your organization stands on the AI maturity curve and get actionable insights to accelerate your AI journey.
+            Discover where your organization stands on the AI readiness curve
+            and receive a report with actionable insights to accelerate your AI journey.
           </p>
         </div>
 
@@ -23,18 +25,21 @@ export default function AssessmentPage() {
         <AssessmentForm />
 
         {/* Footer */}
-        <div className="mt-8 sm:mt-10 md:mt-12 text-center text-sm text-[#f7cfa5] border-t border-[#f7cfa5] pt-6 sm:pt-8">
-          <p>
-            Powered by{' '}
-            <a
-              href="https://synaptiq.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#a1b8ca] hover:underline"
-            >
-              Synaptiq
-            </a>
-          </p>
+        <div className="mt-8 sm:mt-10 md:mt-12">
+          <div className="w-3/4 mx-auto border-t border-[#f7cfa5] mb-6 sm:mb-8"></div>
+          <div className="text-center text-sm text-[#f7cfa5]">
+            <p>
+              Powered by{" "}
+              <a
+                href="https://synaptiq.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#a1b8ca] hover:underline"
+              >
+                Synaptiq
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </main>

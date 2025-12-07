@@ -78,6 +78,7 @@ export interface AssessmentSubmission {
   utmCampaign?: string;
   referrer?: string;
   submittedAt: string;
+  recaptchaToken?: string; // reCAPTCHA v3 token for bot protection
 }
 
 // Calculated assessment result

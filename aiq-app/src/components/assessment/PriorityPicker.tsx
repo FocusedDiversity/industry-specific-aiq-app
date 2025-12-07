@@ -63,17 +63,21 @@ export function PriorityPicker({
         </div>
       </div>
 
-      {Object.entries(groupedCapabilities).map(([category, caps]) => {
+      {Object.entries(groupedCapabilities).map(([category, caps], index) => {
         const config = CATEGORY_CONFIG[category as keyof typeof CATEGORY_CONFIG];
 
         return (
-          <div key={category} className="space-y-3">
-            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center gap-2">
-              <span>{config?.icon}</span>
-              <span>{category}</span>
-            </h3>
+          <div key={category}>
+            {index > 0 && (
+              <hr className="border-gray-200 my-4" />
+            )}
+            <div className="space-y-3 py-2">
+              <h3 className="flex items-center gap-2">
+                <span className="text-xl">{config?.icon}</span>
+                <span className="text-[15px] font-medium text-gray-400 uppercase tracking-wide">{category}</span>
+              </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {caps.map((cap) => {
                 const score = getResponseScore(cap.id);
                 const isSelected = selectedPriorities.includes(cap.id);
@@ -147,6 +151,7 @@ export function PriorityPicker({
                   </button>
                 );
               })}
+              </div>
             </div>
           </div>
         );

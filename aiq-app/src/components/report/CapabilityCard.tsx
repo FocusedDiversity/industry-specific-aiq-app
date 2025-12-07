@@ -25,7 +25,7 @@ export function CapabilityCard({
   return (
     <div
       className={`
-        flex items-center gap-4 p-4 rounded-lg border-2 transition-all duration-200 cursor-pointer
+        flex items-center gap-2 sm:gap-4 p-3 sm:p-4 rounded-lg border-2 transition-all duration-200 cursor-pointer min-h-[60px]
         ${isHovered
           ? 'border-blue-500 bg-blue-50 shadow-md transform scale-[1.02]'
           : 'border-gray-200 bg-white hover:border-blue-300'
@@ -44,7 +44,7 @@ export function CapabilityCard({
     >
       {/* Score badge */}
       <div
-        className="w-12 h-12 rounded-lg flex items-center justify-center font-bold text-xl flex-shrink-0 shadow-sm"
+        className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center font-bold text-lg sm:text-xl flex-shrink-0 shadow-sm"
         style={{
           backgroundColor: getMaturityColor(score),
           color: score >= 3 ? 'white' : '#1e3a5f',
@@ -55,34 +55,19 @@ export function CapabilityCard({
 
       {/* Content */}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 mb-1">
-          <h4 className={`font-semibold truncate ${isHovered ? 'text-blue-900' : 'text-gray-900'}`}>
+        <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1">
+          <h4 className={`font-semibold text-sm sm:text-base ${isHovered ? 'text-blue-900' : 'text-gray-900'}`}>
             {capability.name}
           </h4>
-          <span className={`text-xs px-2 py-0.5 rounded-full border ${getTierBadgeClasses(tier)}`}>
+          <span className={`text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full border whitespace-nowrap ${getTierBadgeClasses(tier)}`}>
             {TIER_LABELS[tier]}
           </span>
         </div>
-        <p className="text-sm text-gray-500">
-          {SCORE_LABELS[score]} maturity
+        <p className="text-xs sm:text-sm text-gray-500">
+          {SCORE_LABELS[score]} readiness
         </p>
       </div>
 
-      {/* Weighted points */}
-      <div className="text-right flex-shrink-0">
-        <p className="font-semibold text-gray-900">{weightedScore}</p>
-        <p className="text-xs text-gray-500">pts</p>
-      </div>
-
-      {/* Arrow indicator */}
-      <svg
-        className={`w-5 h-5 flex-shrink-0 transition-transform ${isHovered ? 'translate-x-1 text-blue-600' : 'text-gray-400'}`}
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-      </svg>
     </div>
   );
 }

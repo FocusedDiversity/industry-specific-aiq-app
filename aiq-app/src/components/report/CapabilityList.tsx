@@ -36,7 +36,7 @@ export function CapabilityList({
   }, {} as Record<CapabilityCategory, (CapabilityResult & { index: number })[]>);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {CATEGORY_ORDER.map((category) => {
         const items = groupedResults[category];
         if (!items || items.length === 0) return null;
@@ -46,12 +46,9 @@ export function CapabilityList({
         return (
           <div key={category}>
             {/* Category header */}
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-xl">{config?.icon}</span>
-              <h3 className="font-semibold text-gray-700">{category}</h3>
-              <span className="text-sm text-gray-500">
-                (Weight: {items[0]?.capability.weight}x)
-              </span>
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <span className="text-lg sm:text-xl">{config?.icon}</span>
+              <h3 className="font-semibold text-gray-700 text-sm sm:text-base">{category}</h3>
             </div>
 
             {/* Capability cards */}

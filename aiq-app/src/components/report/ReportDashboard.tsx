@@ -1,13 +1,12 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { AssessmentResult, Industry } from '@/types';
-import { DonutChart, SliceData } from './DonutChart';
-import { CapabilityList } from './CapabilityList';
-import { NarrativeInsights } from './NarrativeInsights';
-import { ResourceRecommendations } from './ResourceRecommendations';
-import { CTASection } from './CTASection';
-import { ColorLegend } from './ColorLegend';
+import { useState } from "react";
+import { AssessmentResult } from "@/types";
+import { DonutChart, SliceData } from "./DonutChart";
+import { NarrativeInsights } from "./NarrativeInsights";
+import { ResourceRecommendations } from "./ResourceRecommendations";
+import { CTASection } from "./CTASection";
+import { ColorLegend } from "./ColorLegend";
 
 interface ReportDashboardProps {
   results: AssessmentResult;
@@ -24,47 +23,33 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
   }));
 
   // Get industry display name
-  const industryName = results.submission.industry === 'healthcare' ? 'Healthcare' : 'Legal';
+  const industryName =
+    results.submission.industry === "healthcare" ? "Healthcare" : "Legal";
 
   return (
     <div className="space-y-6 sm:space-y-8 md:space-y-12">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4">
-          Your AIQ Assessment Results
+          Your AI Readiness (AIQ) Report
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-gray-300">
-          {industryName} Industry | {results.percentageScore}% AI Maturity
+          {industryName} Industry
         </p>
       </div>
 
-      {/* Main visualization section */}
+      {/* Row 1: Donut chart and Maturity Scale */}
       <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-stretch">
-          {/* Donut chart */}
-          <div className="md:w-1/2 flex flex-col items-center justify-center">
-            <DonutChart
-              slices={sliceData}
-              totalScore={results.totalScore}
-              maxScore={results.maxScore}
-              hoveredSlice={hoveredSlice}
-              onSliceHover={setHoveredSlice}
-            />
-            <div className="mt-4">
-              <ColorLegend />
-            </div>
-          </div>
-
-          {/* Capability list */}
-          <div className="md:w-1/2 w-full">
-            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
-              Capability Scores
-            </h2>
-            <CapabilityList
-              results={results.capabilityResults}
-              hoveredIndex={hoveredSlice}
-              onHover={setHoveredSlice}
-            />
+        <div className="flex flex-col items-center">
+          <DonutChart
+            slices={sliceData}
+            totalScore={results.totalScore}
+            maxScore={results.maxScore}
+            hoveredSlice={hoveredSlice}
+            onSliceHover={setHoveredSlice}
+          />
+          <div className="mt-6 w-full max-w-lg">
+            <ColorLegend />
           </div>
         </div>
       </div>
@@ -84,7 +69,7 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
           <div className="flex flex-wrap gap-2 sm:gap-3">
             {results.submission.topPriorities.map((priorityId, index) => {
               const result = results.capabilityResults.find(
-                (r) => r.capability.id === priorityId
+                (r) => r.capability.id === priorityId,
               );
               if (!result) return null;
 
@@ -123,26 +108,32 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
       <CTASection />
 
       {/* Footer */}
-      <div className="text-center text-sm text-[#f7cfa5] pt-8 border-t border-[#f7cfa5]">
-        <p>
-          Assessment completed on{' '}
-          {new Date(results.submission.submittedAt).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </p>
-        <p className="mt-2">
-          Powered by{' '}
-          <a
-            href="https://synaptiq.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[#a1b8ca] hover:underline"
-          >
-            Synaptiq
-          </a>
-        </p>
+      <div className="pt-8">
+        <div className="w-3/4 mx-auto border-t border-[#f7cfa5] mb-8"></div>
+        <div className="text-center text-sm text-[#f7cfa5]">
+          <p>
+            Assessment completed on{" "}
+            {new Date(results.submission.submittedAt).toLocaleDateString(
+              "en-US",
+              {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              },
+            )}
+          </p>
+          <p className="mt-2">
+            Powered by{" "}
+            <a
+              href="https://synaptiq.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#a1b8ca] hover:underline"
+            >
+              Synaptiq
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

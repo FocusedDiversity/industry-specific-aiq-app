@@ -20,7 +20,7 @@ export function NarrativeInsights({ industry, categoryScores }: NarrativeInsight
   return (
     <div className="space-y-4 sm:space-y-6">
       <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
-        Your AI Maturity Insights
+        Your AI Readiness Insights
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -54,10 +54,6 @@ export function NarrativeInsights({ industry, categoryScores }: NarrativeInsight
 
               {/* Score bar */}
               <div className="mb-4">
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">{scores.score} / {scores.maxScore} pts</span>
-                  <span className="font-medium text-gray-900">{percentage}%</span>
-                </div>
                 <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                   <div
                     className={`h-full transition-all duration-500 ${

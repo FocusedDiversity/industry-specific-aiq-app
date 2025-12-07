@@ -1,13 +1,16 @@
-'use client';
+"use client";
 
-import { Resource } from '@/types';
+import { Resource } from "@/types";
 
-const RESOURCE_TYPE_ICONS: Record<Resource['type'], { icon: string; label: string }> = {
-  case_study: { icon: '📋', label: 'Case Study' },
-  playbook: { icon: '📘', label: 'Playbook' },
-  webinar: { icon: '🎥', label: 'Webinar' },
-  article: { icon: '📄', label: 'Article' },
-  whitepaper: { icon: '📑', label: 'Whitepaper' },
+const RESOURCE_TYPE_ICONS: Record<
+  Resource["type"],
+  { icon: string; label: string }
+> = {
+  case_study: { icon: "📋", label: "Case Study" },
+  playbook: { icon: "📘", label: "Playbook" },
+  webinar: { icon: "🎥", label: "Webinar" },
+  article: { icon: "📄", label: "Article" },
+  whitepaper: { icon: "📑", label: "Whitepaper" },
 };
 
 interface ResourceRecommendationsProps {
@@ -30,7 +33,7 @@ export function ResourceRecommendations({
           Recommended Resources
         </h2>
         <p className="text-gray-600">
-          Curated content to help you improve in your priority areas.
+          Curated resources to help you improve in your priority areas.
         </p>
       </div>
 
@@ -38,7 +41,7 @@ export function ResourceRecommendations({
         {resources.map((resource) => {
           const typeInfo = RESOURCE_TYPE_ICONS[resource.type];
           const isPriorityMatch = priorityCapabilities.some((cap) =>
-            resource.capabilities.includes(cap)
+            resource.capabilities.includes(cap),
           );
 
           return (
@@ -49,9 +52,10 @@ export function ResourceRecommendations({
               rel="noopener noreferrer"
               className={`
                 group block p-5 rounded-xl border-2 transition-all duration-200
-                ${isPriorityMatch
-                  ? 'border-blue-200 bg-blue-50 hover:border-blue-400'
-                  : 'border-gray-200 bg-white hover:border-blue-300'
+                ${
+                  isPriorityMatch
+                    ? "border-blue-200 bg-blue-50 hover:border-blue-400"
+                    : "border-gray-200 bg-white hover:border-blue-300"
                 }
                 hover:shadow-md
               `}
@@ -84,11 +88,11 @@ export function ResourceRecommendations({
                   <span
                     key={tier}
                     className={`text-xs px-2 py-0.5 rounded-full ${
-                      tier === 'leading'
-                        ? 'bg-emerald-100 text-emerald-700'
-                        : tier === 'developing'
-                          ? 'bg-blue-100 text-blue-700'
-                          : 'bg-amber-100 text-amber-700'
+                      tier === "leading"
+                        ? "bg-emerald-100 text-emerald-700"
+                        : tier === "developing"
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-amber-100 text-amber-700"
                     }`}
                   >
                     {tier}
@@ -105,7 +109,12 @@ export function ResourceRecommendations({
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
                 </svg>
               </div>
             </a>
