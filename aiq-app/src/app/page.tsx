@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Raise Your AIQ | Synaptiq',
-  description: 'Discover your organization\'s AI maturity with our free assessment. Get tailored insights and recommendations for Healthcare and Legal industries.',
+  description: 'Discover your organization\'s AI readiness with our free assessment. Get tailored insights and recommendations for Healthcare and Legal industries.',
 };
 
 export default function Home() {
