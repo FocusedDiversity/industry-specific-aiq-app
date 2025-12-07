@@ -104,7 +104,7 @@ export function DonutChart({
   const percentage = Math.round((totalScore / maxScore) * 100);
 
   return (
-    <div className="relative w-full max-w-md aspect-square">
+    <div className="relative w-full max-w-[280px] sm:max-w-sm md:max-w-md aspect-square mx-auto">
       {/* Logo animation */}
       {showLogo && (
         <div

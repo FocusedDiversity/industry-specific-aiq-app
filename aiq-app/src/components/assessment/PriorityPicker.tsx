@@ -98,7 +98,7 @@ export function PriorityPicker({
                   >
                     {/* Priority number badge */}
                     {priorityNumber && (
-                      <div className="absolute -top-2 -left-2 w-7 h-7 bg-[#cc5e58] rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
+                      <div className="absolute -top-3 -left-3 w-8 h-8 bg-[#cc5e58] rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
                         {priorityNumber}
                       </div>
                     )}
@@ -128,19 +128,21 @@ export function PriorityPicker({
                       )}
                     </div>
 
-                    {/* Checkbox */}
-                    <div className={`
-                      w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0
-                      ${isSelected
-                        ? 'border-[#cc5e58] bg-[#cc5e58]'
-                        : 'border-gray-300'
-                      }
-                    `}>
-                      {isSelected && (
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      )}
+                    {/* Checkbox - with 44px touch target */}
+                    <div className="w-11 h-11 flex items-center justify-center flex-shrink-0">
+                      <div className={`
+                        w-6 h-6 rounded border-2 flex items-center justify-center
+                        ${isSelected
+                          ? 'border-[#cc5e58] bg-[#cc5e58]'
+                          : 'border-gray-300'
+                        }
+                      `}>
+                        {isSelected && (
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
                     </div>
                   </button>
                 );

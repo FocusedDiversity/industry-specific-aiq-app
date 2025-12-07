@@ -9,17 +9,17 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#494f5b]">
       {/* Hero Section */}
-      <div className="max-w-6xl mx-auto px-4 py-20">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+      <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16 md:py-20">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
             Raise Your <span className="text-white">AIQ</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8">
             Discover where your organization stands on the AI maturity curve. Get actionable insights tailored to your industry.
           </p>
           <Link
             href="/assessment"
-            className="inline-flex items-center px-8 py-4 bg-[#cc5e58] text-white text-lg font-semibold rounded-lg hover:bg-[#b54f4a] transition-all shadow-lg hover:shadow-xl"
+            className="inline-flex items-center px-6 sm:px-8 py-3 sm:py-4 bg-[#cc5e58] text-white text-base sm:text-lg font-semibold rounded-lg hover:bg-[#b54f4a] transition-all shadow-lg hover:shadow-xl min-h-[44px]"
           >
             Start Free Assessment
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -29,8 +29,8 @@ export default function Home() {
         </div>
 
         {/* Features */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100">
+        <div className="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-10 sm:mb-12 md:mb-16">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100">
             <div className="text-3xl mb-4">📊</div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
               11 Key Capabilities
@@ -40,7 +40,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100">
             <div className="text-3xl mb-4">🎯</div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
               Tailored Insights
@@ -50,7 +50,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100">
             <div className="text-3xl mb-4">⚡</div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
               Quick & Free
@@ -62,13 +62,13 @@ export default function Home() {
         </div>
 
         {/* Industries */}
-        <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 mb-16">
+        <div className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md border border-gray-100 mb-10 sm:mb-12 md:mb-16">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Industry-Specific Assessments
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="flex items-start gap-4">
-              <div className="text-4xl">🏥</div>
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="text-3xl sm:text-4xl">🏥</div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">Healthcare</h3>
                 <p className="text-gray-600 text-sm">
@@ -76,8 +76,8 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-4">
-              <div className="text-4xl">⚖️</div>
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="text-3xl sm:text-4xl">⚖️</div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">Legal</h3>
                 <p className="text-gray-600 text-sm">

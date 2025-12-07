@@ -18,12 +18,12 @@ interface NarrativeInsightsProps {
 
 export function NarrativeInsights({ industry, categoryScores }: NarrativeInsightsProps) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-white mb-6">
+    <div className="space-y-4 sm:space-y-6">
+      <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
         Your AI Maturity Insights
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {CATEGORY_ORDER.map((category) => {
           const scores = categoryScores[category];
           const narrative = getNarrative(industry, category, scores.tier);
@@ -36,7 +36,7 @@ export function NarrativeInsights({ industry, categoryScores }: NarrativeInsight
           return (
             <div
               key={category}
-              className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm"
+              className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 shadow-sm"
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-4">

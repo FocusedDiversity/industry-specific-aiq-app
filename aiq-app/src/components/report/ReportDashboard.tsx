@@ -27,22 +27,22 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
   const industryName = results.submission.industry === 'healthcare' ? 'Healthcare' : 'Legal';
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-6 sm:space-y-8 md:space-y-12">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-white mb-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-4">
           Your AIQ Assessment Results
         </h1>
-        <p className="text-xl text-gray-600">
+        <p className="text-base sm:text-lg md:text-xl text-gray-300">
           {industryName} Industry | {results.percentageScore}% AI Maturity
         </p>
       </div>
 
       {/* Main visualization section */}
-      <div className="bg-white rounded-2xl shadow-lg p-8">
-        <div className="flex flex-col lg:flex-row gap-8 items-stretch">
+      <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-stretch">
           {/* Donut chart */}
-          <div className="lg:w-1/2 flex flex-col items-center justify-center">
+          <div className="md:w-1/2 flex flex-col items-center justify-center">
             <DonutChart
               slices={sliceData}
               totalScore={results.totalScore}
@@ -56,8 +56,8 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
           </div>
 
           {/* Capability list */}
-          <div className="lg:w-1/2 w-full">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+          <div className="md:w-1/2 w-full">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
               Capability Scores
             </h2>
             <CapabilityList
@@ -77,11 +77,11 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
 
       {/* Your priorities section */}
       {results.submission.topPriorities.length > 0 && (
-        <div className="bg-red-50 rounded-2xl p-8 border border-[#cc5e58]/30">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+        <div className="bg-red-50 rounded-2xl p-4 sm:p-6 md:p-8 border border-[#cc5e58]/30">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
             Your Priority Areas
           </h2>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {results.submission.topPriorities.map((priorityId, index) => {
               const result = results.capabilityResults.find(
                 (r) => r.capability.id === priorityId
@@ -91,12 +91,12 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
               return (
                 <div
                   key={priorityId}
-                  className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm border border-[#cc5e58]/30"
+                  className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white rounded-lg shadow-sm border border-[#cc5e58]/30"
                 >
-                  <span className="w-6 h-6 bg-[#cc5e58] text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  <span className="w-6 h-6 bg-[#cc5e58] text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                     {index + 1}
                   </span>
-                  <span className="font-medium text-gray-900">
+                  <span className="font-medium text-gray-900 text-sm sm:text-base">
                     {result.capability.name}
                   </span>
                 </div>
@@ -104,7 +104,7 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
             })}
           </div>
           {results.submission.priorityNotes && (
-            <div className="mt-4 p-4 bg-white rounded-lg border border-[#cc5e58]/30">
+            <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-white rounded-lg border border-[#cc5e58]/30">
               <p className="text-sm text-gray-600 italic">
                 &ldquo;{results.submission.priorityNotes}&rdquo;
               </p>

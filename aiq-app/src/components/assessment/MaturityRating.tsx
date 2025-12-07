@@ -27,7 +27,7 @@ export function MaturityRating({
   const scores: MaturityScore[] = [1, 2, 3, 4, 5];
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+    <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 shadow-sm">
       {/* Capability name */}
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-lg font-semibold text-gray-900">{capabilityName}</h3>
@@ -60,7 +60,7 @@ export function MaturityRating({
           <span>Leading</span>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-1 sm:gap-2">
           {scores.map((score) => {
             const isSelected = value === score;
             const isHovered = hoveredScore === score;
@@ -75,7 +75,7 @@ export function MaturityRating({
                 onMouseEnter={() => setHoveredScore(score)}
                 onMouseLeave={() => setHoveredScore(null)}
                 className={`
-                  flex-1 py-4 rounded-lg font-semibold text-lg transition-all duration-200
+                  flex-1 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-all duration-200 min-h-[44px]
                   ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
                   ${isSelected
                     ? 'ring-2 ring-offset-2 ring-blue-600 transform scale-105'
