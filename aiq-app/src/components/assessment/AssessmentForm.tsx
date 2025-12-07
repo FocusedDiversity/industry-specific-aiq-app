@@ -3,7 +3,8 @@
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { Industry, MaturityScore, CapabilityResponse, AssessmentSubmission } from '@/types';
+import { Industry, MaturityScore, CapabilityResponse, AssessmentSubmission, AssessmentResult } from '@/types';
+import { getIndustryContent } from '@/content/industries';
 import { CAPABILITIES, CATEGORY_ORDER, getCapabilitiesByCategory } from '@/content/capabilities';
 import { getOrderedPrompts, getCapabilityPrompt } from '@/content/industries';
 import { IndustrySelector } from './IndustrySelector';
@@ -195,8 +196,23 @@ export function AssessmentForm() {
 
       const result = await response.json();
 
-      // Redirect to results page
-      router.push(`/report/${result.assessmentId}`);
+      // Build full AssessmentResult for localStorage
+      const content = getIndustryContent(industry);
+      const fullResult: AssessmentResult = {
+        submission: { ...submission, id: result.assessmentId },
+        totalScore: result.results.totalScore,
+        maxScore: result.results.maxScore,
+        percentageScore: result.results.percentageScore,
+        categoryScores: result.results.categoryScores,
+        capabilityResults: result.results.capabilityResults,
+        recommendations: content.resources.slice(0, 5),
+      };
+
+      // Store in localStorage for the results page
+      localStorage.setItem('aiq-assessment-results', JSON.stringify(fullResult));
+
+      // Redirect to static results page
+      router.push('/report/results/');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

@@ -77,20 +77,20 @@ export function ReportPageClient({ id }: ReportPageClientProps) {
   useEffect(() => {
     async function fetchResults() {
       try {
-        // In development/demo, use demo data
-        // In production, fetch from API/Firestore
+        // Demo page shows demo data
         if (id === 'demo') {
           setResults(getDemoResults());
-        } else {
-          // Try to fetch from session storage (set by assessment submission)
-          const storedResults = sessionStorage.getItem(`assessment-${id}`);
+        } else if (id === 'results') {
+          // Results page reads from localStorage (set by assessment submission)
+          const storedResults = localStorage.getItem('aiq-assessment-results');
           if (storedResults) {
             setResults(JSON.parse(storedResults));
           } else {
-            // For now, show demo data
-            // In production, would fetch from Firestore via API
-            setResults(getDemoResults());
+            setError('No assessment results found. Please complete the assessment first.');
           }
+        } else {
+          // Unknown ID - show error
+          setError('Assessment results not found.');
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load results');
