@@ -48,7 +48,10 @@ export function ReportDashboard({ results }: ReportDashboardProps) {
             hoveredSlice={hoveredSlice}
             onSliceHover={setHoveredSlice}
           />
-          <div className="mt-6 w-full max-w-lg">
+          <p className="mt-4 text-sm text-gray-500 text-center">
+            Hover or tap on a slice to see capability details
+          </p>
+          <div className="mt-4 w-full max-w-lg">
             <ColorLegend />
           </div>
         </div>
